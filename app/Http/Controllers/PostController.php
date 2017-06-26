@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.edit');
     }
 
     /**
@@ -35,7 +35,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = Post::create($request->all());
+        return redirect()->action('PostController@show', $post);
     }
 
     /**
