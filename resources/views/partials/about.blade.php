@@ -1,1 +1,1 @@
-<h3 class="blog-title"><a href="/">This is my Blog</a></h3>
+<h3 class="blog-title"><a href="/">Elwin's Blog</a></h3>

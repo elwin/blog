@@ -1,18 +1,20 @@
 <html>
 <head>
     <title>My Blog - @yield('title')</title>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
 
-<link rel="stylesheet" href="/css/app.css">
 
 <div class="container blog-main">
 
     <div class="row">
-        <div class="col-md-4">
-            @include('partials.about')
+        <div class="col-lg-3">
+            <div class="blog-about">
+                @include('partials.about')
+            </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-lg-9">
             @yield('content')
         </div>
     </div>

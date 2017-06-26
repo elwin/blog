@@ -1,9 +1,18 @@
+.blog-about {
+  @include media-breakpoint-up(lg) {
+    position: fixed;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 20px;
+  }
+}
+
 .blog-main {
   margin-top: 100px;
 }
 
 .blog-title {
-
   a, a:hover {
     color: $black;
     text-decoration: none;
