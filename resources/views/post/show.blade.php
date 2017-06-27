@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.twocolumn')
 
 @section('title', $post->title)
 
