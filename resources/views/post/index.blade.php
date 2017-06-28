@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.twocolumn')
 
 @section('title', 'Blog Posts')
 
@@ -13,5 +13,7 @@
         </p>
     </div>
 @endforeach
+
+    {{ $posts->links() }}
 
 @endsection
