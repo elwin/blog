@@ -1,6 +1,20 @@
-@extends('layouts.app')
+@extends('layouts.twocolumn')
 
 @section('content')
+    <div class="card">
+        <div class="card-header">Login</div>
+        <div class="card-block">
+            {{ Form::open() }}
+            {{ Form::esText('name', 'Name') }}
+            {{ Form::esText('email', 'Email') }}
+            {{ Form::esText('password', 'Passwort') }}
+            {{ Form::esText('password_confirmation', 'Passwort') }}
+            {{ Form::esSubmit() }}
+            {{ Form::close() }}
+        </div>
+    </div>
+
+    {{--
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -72,5 +86,5 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 @endsection

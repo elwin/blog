@@ -1,11 +1,12 @@
 <html>
 <head>
     <title>My Blog - @yield('title')</title>
-    <link rel="stylesheet" href="/css/app.css">
-    <script src="/js/app.js"></script>
-</head>
+    @include('partials.meta')
+   </head>
 <body>
-
+{{-- @component('partials.alert')
+    This is some important message!
+@endcomponent --}}
 @yield('page')
 
 </body>

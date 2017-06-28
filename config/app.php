@@ -183,6 +183,10 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\FormServiceProvider::class,
 
+        /*
+         * Markdown Parser
+         */
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
     ],
 
     /*
@@ -232,12 +236,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        /*
-         * Laravel Collective
-         */
+        // Laravel Collective
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
+        // Markdown Parser
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
     ],
 
 ];
