@@ -1,25 +1,13 @@
 <html>
 <head>
     <title>My Blog - @yield('title')</title>
-    <link rel="stylesheet" href="/css/app.css">
-</head>
+    @include('partials.meta')
+   </head>
 <body>
-
-
-<div class="container blog-main">
-    <div class="row">
-        <div class="col-lg-3">
-            <div class="blog-about">
-                @include('partials.about')
-            </div>
-        </div>
-        <div class="col-lg-9">
-            @yield('content')
-        </div>
-    </div>
-</div>
-
-
+{{-- @component('partials.alert')
+    This is some important message!
+@endcomponent --}}
+@yield('page')
 
 </body>
 </html>
