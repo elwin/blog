@@ -36,7 +36,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $post = Post::create($request->all());
-        return redirect()->action('PostController@show', $post);
+        return redirect()->action('PostController@show', $post)->with('success', 'Post successfully created!');
     }
 
     /**
@@ -71,7 +71,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $post->update($request->all());
-        return redirect()->route('post.show', $post);
+        return redirect()->route('post.show', $post)->with('success', 'Post successfully updated!');
     }
 
     /**
@@ -82,6 +82,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('post.index')->with('danger', 'Post successfully deleted!');
     }
 }

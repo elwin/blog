@@ -10,7 +10,9 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 // Blog
-@import "blog.scss";
+@import "blog";
+@import "components";
+@import "footer";
 
 // SimpleMD Editor
 // @import "node_modules/simplemde/dist/simplemde.min";

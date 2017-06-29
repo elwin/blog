@@ -1,13 +1,13 @@
 <html>
 <head>
     <title>My Blog - @yield('title')</title>
-    @include('partials.meta')
+    @include('components.meta')
    </head>
 <body>
-{{-- @component('partials.alert')
-    This is some important message!
-@endcomponent --}}
+
+@include('components.alerts')
 @yield('page')
+@include('components.footer')
 
 </body>
 </html>

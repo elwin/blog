@@ -10,6 +10,11 @@
         <p class="blog-post-excerpt">
             {!! Markdown::convertToHtml($post->body) !!}
         </p>
+
+        <a href="{{ route('post.edit', $post) }}" class="btn btn-outline-primary">Edit</a>
+        {{ Form::open(['route' => ['post.destroy', $post], 'method' => 'DELETE', 'class' => 'form-button-inline']) }}
+        {{ Form::submit('Delete', ['class' => 'btn btn-outline-danger']) }}
+        {{ Form::close() }}
     </div>
 
     <script>
