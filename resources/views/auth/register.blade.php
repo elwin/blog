@@ -1,19 +1,20 @@
-@extends('layouts.twocolumn')
+@extends('layouts.master')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">Login</div>
-        <div class="card-block">
-            {{ Form::open() }}
-            {{ Form::esText('name', 'Name') }}
-            {{ Form::esText('email', 'Email') }}
-            {{ Form::esText('password', 'Passwort') }}
-            {{ Form::esText('password_confirmation', 'Passwort') }}
-            {{ Form::esSubmit() }}
-            {{ Form::close() }}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">Login</div>
+            <div class="card-block">
+                {{ Form::open() }}
+                {{ Form::esText('name', 'Name') }}
+                {{ Form::esText('email', 'Email') }}
+                {{ Form::esText('password', 'Passwort') }}
+                {{ Form::esText('password_confirmation', 'Passwort') }}
+                {{ Form::esSubmit() }}
+                {{ Form::close() }}
+            </div>
         </div>
     </div>
-
     {{--
 <div class="container">
     <div class="row">

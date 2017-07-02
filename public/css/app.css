@@ -10282,3 +10282,27 @@ footer {
   padding: 4rem;
 }
 
+.canvas-network-container {
+  background-color: black;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 0;
+}
+
+.canvas-title {
+  text-align: center;
+  padding: 8rem 0;
+}
+
+.canvas-title a,
+.canvas-title a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.canvas-network {
+  opacity: 0.2;
+  position: absolute;
+  z-index: -10;
+}
+

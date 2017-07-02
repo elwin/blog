@@ -1,16 +1,16 @@
-@extends('layouts.onecolumn')
+@extends('layouts.master')
 
 @section('title', 'Neuen Post erstellen')
 
 @section('content')
-
+<div class="container">
     <div class="card">
         <div class="card-header">Neues Post erstellen</div>
         <div class="card-block">
             @if (!isset($post))
                 {{ Form::open(['route' => 'post.store']) }}
             @else
-                {{ Form::model($post, ['route' => ['updatePoints', $post], 'method' => 'PUT']) }}
+                {{ Form::model($post, ['route' => ['post.update', $post], 'method' => 'PUT']) }}
             @endif
             {{ Form::esText('title', 'Titel') }}
             {{ Form::esTextarea('excerpt', 'Auszug') }}
@@ -28,5 +28,5 @@
             }
         });
     </script>
-
+</div>
 @endsection

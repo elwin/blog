@@ -32802,108 +32802,157 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var strokeColor = 'blue';
+if (document.getElementsByClassName('canvas-network').length > 0) {
+    var setup = function setup() {
+        fitToContainer(canvas);
+        // canvas.width = window.innerWidth;
+        // canvas.height = window.innerHeight;
 
-var canvas = document.querySelector('canvas');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-var ctx = canvas.getContext('2d');
+        var pixels = canvas.width * canvas.height;
 
-var Point = function () {
-    function Point(width, height) {
-        _classCallCheck(this, Point);
+        return new Network(points = pixels / 4000, strokeLength = 150);
+    };
 
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vel = {
-            x: Math.random() * 2 - 1,
-            y: Math.random() * 2 - 1
-        };
-    }
+    var fitToContainer = function fitToContainer(canvas) {
+        // Make it visually fill the positioned parent
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        // ...then set the internal size to match
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    };
 
-    _createClass(Point, [{
-        key: 'draw',
-        value: function draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, 4, 0, 2 * Math.PI);
-            ctx.globalAlpha = 1;
-            ctx.fillStyle = strokeColor;
-            ctx.fill();
+    var loop = function loop() {
+        network.update();
+        requestAnimationFrame(loop);
+    };
+
+    /*
+     canvas.addEventListener('mousemove', function(event) {
+     let mouse = new Point(event.x, event.y);
+     network.updateLineWithMouse(mouse)
+     });
+     */
+
+    var strokeColor = '#5cb85c';
+    var pointColor = '#5cb85c';
+
+    var Point = function () {
+        function Point(width, height) {
+            _classCallCheck(this, Point);
+
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vel = {
+                x: (Math.random() * 2 - 1) / 4,
+                y: (Math.random() * 2 - 1) / 4
+            };
         }
-    }, {
-        key: 'move',
-        value: function move() {
-            if (this.x > canvas.width || this.x < 0) this.vel.x *= -1;
-            if (this.y > canvas.height || this.y < 0) this.vel.y *= -1;
 
-            this.x += this.vel.x;
-            this.y += this.vel.y;
+        _createClass(Point, [{
+            key: 'draw',
+            value: function draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2, 0, 2 * Math.PI);
+                ctx.globalAlpha = 1;
+                ctx.fillStyle = pointColor;
+                ctx.fill();
+            }
+        }, {
+            key: 'move',
+            value: function move() {
+                if (this.x > canvas.width + 100 || this.x < -100) this.vel.x *= -1;
+                if (this.y > canvas.height + 100 || this.y < -100) this.vel.y *= -1;
+
+                this.x += this.vel.x;
+                this.y += this.vel.y;
+            }
+        }]);
+
+        return Point;
+    }();
+
+    var Network = function () {
+        function Network() {
+            var points = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 400;
+            var strokeLength = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
+
+            _classCallCheck(this, Network);
+
+            this.points = [];
+            this.strokeLength = strokeLength;
+
+            for (var i = 0; i < points; i++) {
+                this.points.push(new Point(canvas.width, canvas.height));
+            }
         }
-    }]);
 
-    return Point;
-}();
+        _createClass(Network, [{
+            key: 'updatePoints',
+            value: function updatePoints() {
+                this.points.forEach(function (point) {
+                    point.move();
+                    point.draw();
+                });
+            }
+        }, {
+            key: 'createLineBetween',
+            value: function createLineBetween(first, second) {
+                var distance = Math.hypot(first.x - second.x, first.y - second.y);
 
-var Network = function () {
-    function Network(points) {
-        _classCallCheck(this, Network);
-
-        this.points = [];
-
-        for (var i = 0; i < points; i++) {
-            this.points.push(new Point(canvas.width, canvas.height));
-        }
-    }
-
-    _createClass(Network, [{
-        key: 'updatePoints',
-        value: function updatePoints() {
-            this.points.forEach(function (point) {
-                point.move();
-                point.draw();
-            });
-        }
-    }, {
-        key: 'updateLines',
-        value: function updateLines() {
-            for (var i = 0; i < this.points.length - 1; i++) {
-                for (var j = i + 1; j < this.points.length; j++) {
-                    var first = this.points[i];
-                    var second = this.points[j];
-
-                    var distance = Math.hypot(first.x - second.x, first.y - second.y);
-
-                    if (distance < 150) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = strokeColor;
-                        ctx.globalAlpha = 1 - distance / 100;
-                        ctx.moveTo(first.x, first.y);
-                        ctx.lineTo(second.x, second.y);
-                        ctx.stroke();
+                if (distance < this.strokeLength) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = strokeColor;
+                    ctx.globalAlpha = 1 - distance / this.strokeLength;
+                    ctx.moveTo(first.x, first.y);
+                    ctx.lineTo(second.x, second.y);
+                    ctx.stroke();
+                }
+            }
+        }, {
+            key: 'updateLines',
+            value: function updateLines() {
+                for (var i = 0; i < this.points.length - 1; i++) {
+                    for (var j = i + 1; j < this.points.length; j++) {
+                        this.createLineBetween(this.points[i], this.points[j]);
                     }
                 }
             }
-        }
-    }, {
-        key: 'update',
-        value: function update() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            this.updateLines();
-            this.updatePoints();
-        }
-    }]);
+        }, {
+            key: 'updateLineWithMouse',
+            value: function updateLineWithMouse() {
+                var mouse = new Point(ctx.clientX, ctx.clientY);
+                for (var i = 0; i < this.points.length; i++) {
+                    this.createLineBetween(mouse, this.points[i]);
+                }
+            }
+        }, {
+            key: 'update',
+            value: function update() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                this.updateLines();
+                this.updatePoints();
+                this.updateLineWithMouse();
+            }
+        }]);
 
-    return Network;
-}();
+        return Network;
+    }();
 
-var network = new Network(200);
+    var canvas = document.getElementsByClassName('canvas-network')[0];
+    var ctx = canvas.getContext('2d');
 
-function loop() {
-    network.update();
-    requestAnimationFrame(loop);
+    var network = setup();
+    loop();
+
+    var resizeTimer = void 0;
+    window.onresize = function (event) {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            network = setup();
+        }, 250);
+    };
 }
-
-loop();
 
 /***/ }),
 /* 35 */

@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('page')
-    <canvas></canvas>
+@section('content')
+    <canvas class="canvas-network"></canvas>
 
     <style>
+
         canvas {
-            width: 100%;
-            height: 100%;
+            background-color: black;
         }
     </style>
 @endsection
