@@ -10,7 +10,7 @@
             @if (!isset($post))
                 {{ Form::open(['route' => 'post.store']) }}
             @else
-                {{ Form::model($post, ['route' => ['post.update', $post], 'method' => 'PUT']) }}
+                {{ Form::model($post, ['route' => ['updatePoints', $post], 'method' => 'PUT']) }}
             @endif
             {{ Form::esText('title', 'Titel') }}
             {{ Form::esTextarea('excerpt', 'Auszug') }}

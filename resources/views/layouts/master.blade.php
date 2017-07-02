@@ -1,13 +1,13 @@
 <html>
 <head>
-    <title>My Blog - @yield('title')</title>
-    @include('components.meta')
+    <title>My Blog @yield('title')</title>
    </head>
 <body>
 
 @include('components.alerts')
 @yield('page')
-@include('components.footer')
+
+@include('components.meta')
 
 </body>
 </html>

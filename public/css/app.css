@@ -10208,6 +10208,15 @@ a.text-gray-dark:hover {
 
 .blog-about-sidebar .blog-icon {
   display: block;
+}
+
+.blog-about-sidebar .blog-icon path {
+  -webkit-transition: fill .25s ease;
+  transition: fill .25s ease;
+  fill: #eceeef;
+}
+
+.blog-about-sidebar .blog-icon:hover path {
   fill: #5cb85c;
 }
 

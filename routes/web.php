@@ -11,8 +11,11 @@
 |
 */
 
-Route::get('/', 'PostController@index');
-Route::resource('post', 'PostController');
-Auth::routes();
+Route::get('/', 'HomeController@index');
+Route::get('/blog', 'PostController@index');
+Route::resource('/blog/post', 'PostController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Auth::routes();
