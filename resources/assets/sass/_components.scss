@@ -1,0 +1,25 @@
+.form-button-inline {
+  display: inline-block;
+  padding-bottom: 0;
+}
+
+.top-alert {
+  padding: 20px 0;
+  color: white;
+}
+
+.top-alert-success {
+  background-color: $green;
+}
+
+.top-alert-info {
+  background-color: $blue;
+}
+
+.top-alert-warning {
+  background-color: $yellow;
+}
+
+.top-alert-danger {
+  background-color: $red;
+}

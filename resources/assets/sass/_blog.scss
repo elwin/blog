@@ -1,10 +1,29 @@
-.blog-about {
+.blog-about-sidebar {
   @include media-breakpoint-up(lg) {
-    position: fixed;
+    // position: fixed;
   }
 
   @include media-breakpoint-down(md) {
     margin-bottom: 20px;
+  }
+
+  .blog-icon {
+    display: block;
+    fill: $gray-light;
+
+    &:hover {
+      fill: $primary;
+    }
+  }
+}
+
+.blog-about {
+
+  .blog-icon {
+    display: block;
+    fill: $brand-primary;
+    max-width: 8rem;
+    margin: 4rem auto;
   }
 }
 
@@ -26,16 +45,10 @@
 .blog-post-title {
 
   a, a:hover {
-    color: $primary;
+    color: $brand-primary;
   }
 }
 
 .blog-post-meta {
   color: $gray-light;
-}
-
-.top-alert {
-  background-color: $green;
-  padding: 20px 0;
-  color: white;
 }

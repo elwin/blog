@@ -187,6 +187,11 @@ return [
          * Markdown Parser
          */
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+
+        /*
+         * IDE Helper
+         */
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*

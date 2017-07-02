@@ -1,5 +1,7 @@
 @if ($message)
     <div class="top-alert top-alert-{{ $status }}">
-        {!! $message !!}
+        <div class="container">
+            {!! $message !!}
+        </div>
     </div>
 @endif
