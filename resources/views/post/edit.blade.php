@@ -1,9 +1,9 @@
-@extends('layouts.onecolumn')
+@extends('layouts.master')
 
 @section('title', 'Neuen Post erstellen')
 
 @section('content')
-
+<div class="container">
     <div class="card">
         <div class="card-header">Neues Post erstellen</div>
         <div class="card-block">
@@ -28,5 +28,5 @@
             }
         });
     </script>
-
+</div>
 @endsection

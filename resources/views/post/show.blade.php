@@ -1,9 +1,9 @@
-@extends('layouts.twocolumn')
+@extends('layouts.master')
 
 @section('title', $post->title)
 
 @section('content')
-
+<div class="container">
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="{{ action('PostController@show', $post) }}">{{ $post->title }}</a></h2>
         <p class="blog-post-meta">{{ $post->created_at->diffForHumans() }}</p>
@@ -20,5 +20,5 @@
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-
+</div>
 @endsection

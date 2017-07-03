@@ -11,4 +11,5 @@
         </div>
         @yield('content')
     </div>
+    @include('components.footer')
 @endsection

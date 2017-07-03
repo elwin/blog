@@ -9,13 +9,20 @@
 
   .blog-icon {
     display: block;
-    fill: $gray-light;
+
+    path {
+      transition: fill .25s ease;
+      fill: $gray-lighter;
+    }
 
     &:hover {
-      fill: $primary;
+      path {
+        fill: $brand-primary;
+      }
     }
   }
 }
+
 
 .blog-about {
 
