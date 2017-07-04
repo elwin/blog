@@ -12,4 +12,15 @@ class Post extends Model
     protected $dates = ['deleted_at'];
 
     protected $guarded = [];
+
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withTimestamps();
+    }
+
+    public function getCategoryListAttribute()
+    {
+        return $this->categories;
+    }
 }

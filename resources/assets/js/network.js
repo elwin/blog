@@ -91,7 +91,7 @@ if (document.getElementsByClassName('canvas-network').length > 0) {
 
         let pixels = canvas.width * canvas.height;
 
-         return new Network(points = pixels / 4000, strokeLength = 150);
+         return new Network(points = pixels / 4000, strokeLength = 200);
     }
 
     function fitToContainer(canvas){
