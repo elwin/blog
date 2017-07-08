@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Http\Requests\StoreBlogPost;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -33,9 +35,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogPost $request)
     {
-        $post = Post::create($request->all());
+        $post = $this->createPost($request);
+
         return redirect()->action('PostController@show', $post)->with('success', 'Post successfully created!');
     }
 
@@ -68,9 +71,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(StoreBlogPost $request, Post $post)
     {
-        $post->update($request->all());
+        $this->updatePost($request, $post);
+
         return redirect()->route('post.show', $post)->with('success', 'Post successfully updated!');
     }
 
@@ -84,5 +88,31 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect()->route('post.index')->with('danger', 'Post successfully deleted!');
+    }
+
+    private function syncCategories(Post $post, array $categories)
+    {
+        $ids = [];
+        foreach ($categories as $category) {
+            $c = Category::find($category);
+            if ($c == null)
+                $c = Category::create(['title' => $category]);
+            $ids[] = $c->id;
+        }
+        $post->categories()->sync($ids);
+    }
+
+    private function createPost(StoreBlogPost $request)
+    {
+        $post = Post::create($request->except('categories'));
+        $this->syncCategories($post, $request->input('categories'));
+
+        return $post;
+    }
+
+    private function updatePost(StoreBlogPost $request, Post $post)
+    {
+        $post->update($request->except(['categories']));
+        $this->syncCategories($post, $request->input('categories'));
     }
 }

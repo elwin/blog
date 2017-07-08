@@ -15,7 +15,7 @@
                 {{ Form::esText('title', 'Titel') }}
                 {{ Form::esTextarea('excerpt', 'Auszug') }}
                 {{ Form::esTextarea('body', 'Post') }}
-                {{ Form::esSelect('categories', 'Kategorie', $categories, $multiple = true) }}
+                {{ Form::esSelect('categories[]', 'Kategorie', $categories, $multiple = true) }}
                 {{ Form::esSubmit() }}
                 {{ Form::close() }}
             </div>
@@ -28,6 +28,20 @@
                     codeSyntaxHighlighting: true,
                 }
             });
+
+            $('select').select2({
+                tags: true,
+            });
         </script>
+
+        <style>
+            .select2-container {
+                width: 100% !important;
+            }
+
+            .select2-selection {
+                height: 38px;
+            }
+        </style>
     </div>
 @endsection

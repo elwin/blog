@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('post.edit', function($view) {
-           $view->with('categories', Category::all()->pluck('title', 'id'));
+           $view->with('categories', Category::pluck('title', 'id'));
         });
     }
 
