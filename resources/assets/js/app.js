@@ -8,3 +8,4 @@
 require('./bootstrap');
 
 require('./network');
+require('./wave');

@@ -6,10 +6,10 @@
 <body>
 
 @include('components.alerts')
-<div class="canvas-network-container">
+<!-- <div class="canvas-network-container">
     <canvas class="canvas-network"></canvas>
     <h1 class="canvas-title"><a href="/">Elwin Stephan</a></h1>
-</div>
+</div> -->
 
 @yield('content')
 @include('components.dependencies')

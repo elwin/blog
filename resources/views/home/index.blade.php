@@ -1,11 +1,18 @@
 @extends('layouts.master')
 
 @section('content')
-    <canvas class="canvas-network"></canvas>
+    <div class="canvas-wave-container">
+        <canvas class="canvas-wave"></canvas>
+    </div>
 
     <style>
 
-        canvas {
+        .canvas-wave-container {
+            width: 100%;
+            height: 400px;
+        }
+
+        .canvas-wave {
             background-color: black;
         }
     </style>

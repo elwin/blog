@@ -739,7 +739,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(8);
-module.exports = __webpack_require__(35);
+module.exports = __webpack_require__(36);
 
 
 /***/ }),
@@ -756,6 +756,7 @@ module.exports = __webpack_require__(35);
 __webpack_require__(9);
 
 __webpack_require__(34);
+__webpack_require__(35);
 
 /***/ }),
 /* 9 */
@@ -32956,6 +32957,77 @@ if (document.getElementsByClassName('canvas-network').length > 0) {
 
 /***/ }),
 /* 35 */
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var canvas = document.getElementsByClassName('canvas-wave')[0];
+var ctx = canvas.getContext('2d');
+
+canvas.style.width = '100%';
+canvas.style.height = '100%';
+
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+
+function waveForm(x) {
+    var amplitude = 2.5;
+    var period = 4;
+    var freq = 1;
+    var phase = 20;
+
+    return Math.sin(x);
+}
+
+var Point = function () {
+    function Point(x, y) {
+        _classCallCheck(this, Point);
+
+        this.x = x;
+        this.y = y;
+    }
+
+    _createClass(Point, [{
+        key: 'translateX',
+        value: function translateX() {
+            return this.x * 1 + canvas.width / 2;
+        }
+    }, {
+        key: 'translateY',
+        value: function translateY() {
+            return canvas.height / 2 - this.y * 100;
+        }
+    }]);
+
+    return Point;
+}();
+
+ctx.beginPath();
+ctx.strokeStyle = 'red';
+
+function drawPoints(oldPoint, newPoint) {
+    ctx.moveTo(oldPoint.translateX(), oldPoint.translateY());
+    ctx.lineTo(newPoint.translateX(), newPoint.translateY());
+    ctx.stroke();
+}
+
+var oldPoint = void 0;
+var newPoint = new Point(-10000, waveForm(-10000));
+
+for (var i = -10000; i < canvas.width; i += 10) {
+
+    oldPoint = newPoint;
+    newPoint = new Point(i, waveForm(i));
+
+    console.log(oldPoint.translateX(), oldPoint.translateY());
+
+    drawPoints(oldPoint, newPoint);
+}
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

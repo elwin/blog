@@ -5,6 +5,7 @@
 @section('content')
 
     <div class="container">
+
         @foreach($posts as $post)
             <div class="blog-post">
                 <h2 class="blog-post-title"><a href="{{ action('PostController@show', $post) }}">{{ $post->title }}</a></h2>
