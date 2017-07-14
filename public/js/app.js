@@ -32972,59 +32972,81 @@ canvas.style.height = '100%';
 canvas.width = canvas.offsetWidth;
 canvas.height = canvas.offsetHeight;
 
-function waveForm(x) {
-    var amplitude = 2.5;
-    var period = 4;
-    var freq = 1;
-    var phase = 20;
+var Playground = function () {
+    function Playground(canvas) {
+        _classCallCheck(this, Playground);
 
-    return Math.sin(x);
-}
+        this.ctx = canvas.getContext('2d');
+        this.width = canvas.width;
+        this.height = canvas.height;
 
-var Point = function () {
-    function Point(x, y) {
-        _classCallCheck(this, Point);
+        this.left = -(canvas.width / 2);
+        this.right = canvas.width / 2;
+        this.top = canvas.height / 2;
+        this.bottom = -(canvas.height / 2);
 
-        this.x = x;
-        this.y = y;
+        this.t = 0;
     }
 
-    _createClass(Point, [{
+    _createClass(Playground, [{
         key: 'translateX',
-        value: function translateX() {
-            return this.x * 1 + canvas.width / 2;
+        value: function translateX(x) {
+            return x - this.left;
         }
     }, {
         key: 'translateY',
-        value: function translateY() {
-            return canvas.height / 2 - this.y * 100;
+        value: function translateY(y) {
+            return this.top - y;
+        }
+    }, {
+        key: 'lineTo',
+        value: function lineTo(x, y) {
+            this.ctx.lineTo(this.translateX(x), this.translateY(y));
+            this.ctx.stroke();
+        }
+    }, {
+        key: 'drawGraph',
+        value: function drawGraph(myFunction) {
+
+            ctx.beginPath();
+
+            for (var i = this.left; i < this.right; i += 20) {
+                this.lineTo(i, 100 * myFunction(i / 100, this.t / 50));
+            }
+
+            this.t++;
+        }
+    }, {
+        key: 'clear',
+        value: function clear() {
+            this.ctx.clearRect(0, 0, this.width, this.height);
         }
     }]);
 
-    return Point;
+    return Playground;
 }();
 
-ctx.beginPath();
-ctx.strokeStyle = 'red';
+var p = new Playground(canvas);
 
-function drawPoints(oldPoint, newPoint) {
-    ctx.moveTo(oldPoint.translateX(), oldPoint.translateY());
-    ctx.lineTo(newPoint.translateX(), newPoint.translateY());
-    ctx.stroke();
+function loop() {
+    p.clear();
+
+    p.drawGraph(function (x, t) {
+        return Math.exp(-0.5 * Math.pow(x, 2)) * Math.cos(4 * x + t);
+    });
+
+    p.drawGraph(function (x, t) {
+        return Math.exp(-0.5 * Math.pow(x, 2)) * Math.cos(2 * x + t) / 2;
+    });
+
+    p.drawGraph(function (x, t) {
+        return Math.exp(-0.5 * Math.pow(x, 2)) * Math.cos(4 * x + t) / 8;
+    });
+
+    requestAnimationFrame(loop);
 }
 
-var oldPoint = void 0;
-var newPoint = new Point(-10000, waveForm(-10000));
-
-for (var i = -10000; i < canvas.width; i += 10) {
-
-    oldPoint = newPoint;
-    newPoint = new Point(i, waveForm(i));
-
-    console.log(oldPoint.translateX(), oldPoint.translateY());
-
-    drawPoints(oldPoint, newPoint);
-}
+loop();
 
 /***/ }),
 /* 36 */

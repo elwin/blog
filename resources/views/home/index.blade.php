@@ -13,7 +13,7 @@
         }
 
         .canvas-wave {
-            background-color: black;
+            background-color: gray;
         }
     </style>
 @endsection
