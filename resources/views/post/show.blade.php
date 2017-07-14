@@ -6,7 +6,7 @@
 <div class="container">
     <div class="blog-post">
         <h2 class="blog-post-title"><a href="{{ action('PostController@show', $post) }}">{{ $post->title }}</a></h2>
-        <p class="blog-post-meta">{{ $post->created_at->diffForHumans() }}</p>
+        <p class="blog-post-meta">{{ $post->created_at->diffForHumans() }}: {{ $post->categories->implode('title', ', ') }}</p>
         <p class="blog-post-excerpt">
             {!! Markdown::convertToHtml($post->body) !!}
         </p>
